@@ -29,17 +29,4 @@ public class ControllerPokemon {
     public Pokemon showPokemon(@PathVariable("id") int id){
         return servicioPokemon.findById(id);
     } // Método que devuelve un pokemon
-
-    @PostMapping("/comprarVida/{id}") // Anotación que indica que el método maneja las peticiones POST
-    public void comprarVida(@PathVariable("id") int idPokemon){ // Método que realiza la compra de vida
-        Pokemon pokemon = servicioPokemon.findById(idPokemon);
-        Entrenador entrenador = pokemon.getEntrenador();
-        if(pokemon.getHp() < 100 && entrenador.getDinero() >= 30000f){
-            pokemon.setHp(pokemon.getHp() + 5);
-            entrenador.setDinero(entrenador.getDinero() - 30000f);
-            servicioPokemon.save(pokemon);
-        }else{
-            System.out.println("No Puedes comprar vida");
-        }
-    }
 }
